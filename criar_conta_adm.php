@@ -1,52 +1,52 @@
 <?php
 session_start();
-require 'conexao.php';
+require 'conexao.php'; // Arquivo de conexão com o banco
 
-$erro = ""; // Variável para armazenar mensagens de erro
+// Verifica se o usuário é um administrador logado
+if (!isset($_SESSION["usuario_id"]) || $_SESSION["usuario_tipo"] !== "administrador") {
+    header("Location: index.php");
+    exit;
+}
 
+$erro = "";
+
+// Verifica se o formulário foi enviado
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $nome = trim($_POST["nome"]);
     $email = trim($_POST["email"]);
-    $senha = trim($_POST["senha"]);
+    $senha = password_hash($_POST["senha"], PASSWORD_DEFAULT); // Criptografa a senha
 
-    if (!empty($email) && !empty($senha)) {
-        $sql = "SELECT id_usuario, nome, senha, tipo FROM usuarios WHERE email = ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("s", $email);
-        $stmt->execute();
-        $result = $stmt->get_result();
+    // Verifica se o e-mail já existe no banco
+    $sql_check = "SELECT id_usuario FROM usuarios WHERE email = ?";
+    $stmt_check = $conn->prepare($sql_check);
+    $stmt_check->bind_param("s", $email);
+    $stmt_check->execute();
+    $result_check = $stmt_check->get_result();
 
-        if ($result->num_rows == 1) {
-            $user = $result->fetch_assoc();
-
-            if (password_verify($senha, $user["senha"])) {
-                $_SESSION["usuario_id"] = $user["id_usuario"];
-                $_SESSION["usuario_nome"] = $user["nome"];
-                $_SESSION["usuario_tipo"] = $user["tipo"];
-
-                if ($user["tipo"] == "administrador") {
-                    header("Location: painel_admin.php");
-                } else {
-                    header("Location: index.php");
-                }
-                exit;
-            } else {
-                $erro = "⚠️ Senha incorreta!";
-            }
-        } else {
-            $erro = "⚠️ Usuário não encontrado!";
-        }
+    if ($result_check->num_rows > 0) {
+        $erro = "Erro: Este e-mail já está cadastrado!";
     } else {
-        $erro = "⚠️ Preencha todos os campos!";
+        // Insere novo administrador no banco
+        $sql = "INSERT INTO usuarios (nome, email, senha, tipo) VALUES (?, ?, ?, 'administrador')";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("sss", $nome, $email, $senha);
+
+        if ($stmt->execute()) {
+            header("Location: painel_admin.php"); // Redireciona para o painel do administrador
+            exit;
+        } else {
+            $erro = "Erro ao cadastrar administrador!";
+        }
     }
 }
 ?>
 
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Criar Conta Administrador</title>
     <style>
         * {
             box-sizing: border-box;
@@ -104,34 +104,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             font-weight: bold;
             margin-bottom: 1rem;
         }
-        .forgot-password {
-            margin-top: 10px;
-            font-size: 0.9rem;
-        }
-        .forgot-password a {
-            color: rgb(54, 79, 190);
-            text-decoration: none;
-        }
-        .forgot-password a:hover {
-            text-decoration: underline;
-        }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h2>Login</h2>
-    <?php if (!empty($erro)) echo "<p class='erro'>$erro</p>"; ?>
-    <form action="login.php" method="POST">
+    <h2>Criar Conta de Administrador</h2>
+    <form action="criar_conta_adm.php" method="POST">
         <div class="input-group">
-            <input type="email" name="email" placeholder="Digite seu e-mail" required>
+            <input type="text" name="nome" placeholder="Nome" required>
         </div>
         <div class="input-group">
-            <input type="password" name="senha" placeholder="Digite sua senha" required>
+            <input type="email" name="email" placeholder="E-mail" required>
         </div>
-        <button type="submit" class="btn">Entrar</button>
+        <div class="input-group">
+            <input type="password" name="senha" placeholder="Senha" required>
+        </div>
+        <button type="submit" class="btn">Criar Conta</button>
     </form>
-    <p class="forgot-password"><a href="recuperar_senha.php">Esqueci minha senha</a></p>
+    <?php if ($erro) echo "<p class='erro'>\$erro</p>"; ?>
 </div>
 
 </body>

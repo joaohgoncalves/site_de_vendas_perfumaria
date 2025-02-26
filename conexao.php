@@ -1,14 +1,18 @@
 <?php
-$servername = "localhost"; // Altere se necessário
-$username = "root"; // Usuário do MySQL
-$password = ""; // Senha do MySQL (caso tenha)
-$database = "teste"; // Nome do banco de dados
+// Inicia a sessão apenas se ainda não estiver ativa
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
-// Criando conexão
-$conn = new mysqli($servername, $username, $password, $database);
+$host = "localhost";
+$usuario = "root"; // Usuário do banco
+$senha = ""; // Senha do banco (vazia no XAMPP)
+$banco = "teste"; // Nome do banco de dados
 
-// Verificando conexão
+$conn = new mysqli($host, $usuario, $senha, $banco);
+
+// Verifica se a conexão falhou
 if ($conn->connect_error) {
-    die("Falha na conexão: " . $conn->connect_error);
+    die("Erro na conexão: " . $conn->connect_error);
 }
 ?>
