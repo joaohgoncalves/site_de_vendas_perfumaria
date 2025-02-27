@@ -1,6 +1,6 @@
 <?php
 session_start();
-require 'conexao.php';
+require 'conexao.php'; // O arquivo onde a conexão PDO é configurada
 
 $erro = ""; // Variável para armazenar mensagens de erro
 
@@ -9,20 +9,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $senha = trim($_POST["senha"]);
 
     if (!empty($email) && !empty($senha)) {
-        $sql = "SELECT id_usuario, nome, senha, tipo FROM usuarios WHERE email = ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("s", $email);
+        // Usando PDO para preparar a consulta
+        $sql = "SELECT id_usuario, nome, senha, tipo FROM usuarios WHERE email = :email";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':email', $email, PDO::PARAM_STR);
         $stmt->execute();
-        $result = $stmt->get_result();
 
-        if ($result->num_rows == 1) {
-            $user = $result->fetch_assoc();
+        // Verificando se o usuário existe
+        if ($stmt->rowCount() == 1) {
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
             if (password_verify($senha, $user["senha"])) {
+                // Armazenando informações na sessão
                 $_SESSION["usuario_id"] = $user["id_usuario"];
                 $_SESSION["usuario_nome"] = $user["nome"];
                 $_SESSION["usuario_tipo"] = $user["tipo"];
 
+                // Redirecionando com base no tipo de usuário
                 if ($user["tipo"] == "administrador") {
                     header("Location: painel_admin.php");
                 } else {

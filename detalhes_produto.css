@@ -1,0 +1,354 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: #f4f7fb;
+    color: #333;
+    padding: 30px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.produto-info {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin-bottom: 50px;
+}
+
+.imagem-produto img {
+    width: 100%;
+    max-width: 450px;
+    border-radius: 12px;
+    object-fit: cover;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.detalhes-produto {
+    flex: 1;
+    min-width: 300px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+}
+
+h1 {
+    font-size: 32px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.avaliacao {
+    font-size: 18px;
+    color: #FFD700;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.preco {
+    font-size: 28px;
+    font-weight: 700;
+    color: #2D8C5D;
+    margin-bottom: 20px;
+}
+
+.parcelas {
+    font-size: 16px;
+    color: #777;
+    margin-bottom: 25px;
+}
+
+.botao-comprar {
+    display: inline-block;
+    padding: 16px 32px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 8px;
+    margin-top: 20px;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.botao-comprar:hover {
+    background-color: #0056b3;
+    transform: translateY(-3px);
+}
+
+.coisas-para-saber {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #f9fafc;
+    border-radius: 8px;
+    border: 1px solid #e2e2e2;
+    font-size: 16px;
+    color: #555;
+}
+
+.coisas-para-saber h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.coisas-para-saber ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.coisas-para-saber ul li {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
+
+.descricao {
+    margin-top: 50px;
+    border-top: 2px solid #f0f0f0;
+    padding-top: 30px;
+}
+
+.descricao h3 {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.descricao p {
+    font-size: 16px;
+    line-height: 1.7;
+    color: #555;
+}
+
+.outros-produtos {
+    margin-top: 50px;
+}
+
+.outros-produtos h3 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 25px;
+    color: #333;
+}
+
+.produtos-lista {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.produto-card {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.produto-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.produto-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.produto-card a {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    text-decoration: none;
+    margin-bottom: 10px;
+    display: block;
+    transition: color 0.3s ease;
+}
+
+.produto-card a:hover {
+    color: #007bff;
+}
+
+.produto-card p {
+    font-size: 18px;
+    color: #2D8C5D;
+    font-weight: 700;
+}
+
+.avaliacoes {
+    margin-top: 50px;
+}
+
+.avaliacoes h3 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.avaliacao-item {
+    padding: 20px;
+    border-bottom: 1px solid #e2e2e2;
+    margin-bottom: 25px;
+}
+
+.avaliacao-item strong {
+    font-size: 18px;
+    color: #333;
+}
+
+.avaliacao-item .avaliacao {
+    font-size: 18px;
+    color: #FFD700;
+    margin: 10px 0;
+    font-weight: 500;
+}
+
+.avaliacao-item p {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.7;
+}
+
+.avaliacao-item small {
+    font-size: 14px;
+    color: #777;
+}
+
+.form-avaliacao {
+    background-color: #f9fafc;
+    padding: 30px;
+    border-radius: 8px;
+    margin-top: 40px;
+    border: 1px solid #e2e2e2;
+}
+
+.form-avaliacao h4 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.form-avaliacao label {
+    font-size: 16px;
+    color: #333;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.form-avaliacao select,
+.form-avaliacao textarea {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #e2e2e2;
+    font-size: 16px;
+    margin-bottom: 20px;
+    resize: vertical;
+}
+
+.form-avaliacao button {
+    padding: 14px 30px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.form-avaliacao button:hover {
+    background-color: #218838;
+}
+
+.perguntas {
+    margin-top: 50px;
+}
+
+.perguntas h3 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.pergunta-item {
+    padding: 20px;
+    border-bottom: 1px solid #e2e2e2;
+    margin-bottom: 25px;
+}
+
+.pergunta-item strong {
+    font-size: 18px;
+    color: #333;
+}
+
+.pergunta-item p {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.7;
+}
+
+.form-pergunta {
+    margin-top: 40px;
+    padding: 30px;
+    background-color: #f9fafc;
+    border-radius: 8px;
+    border: 1px solid #e2e2e2;
+}
+
+.form-pergunta h4 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.form-pergunta textarea {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #e2e2e2;
+    font-size: 16px;
+    margin-bottom: 20px;
+    resize: vertical;
+}
+
+.form-pergunta button {
+    padding: 14px 30px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.form-pergunta button:hover {
+    background-color: #218838;
+}

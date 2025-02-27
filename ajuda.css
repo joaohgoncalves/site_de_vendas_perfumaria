@@ -1,0 +1,73 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+}
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, rgb(1, 9, 44), rgb(75, 105, 162));
+}
+.container {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+header nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+header nav ul li {
+    margin-right: 20px;
+}
+header nav ul li a {
+    text-decoration: none;
+    color: rgb(1, 9, 44);
+}
+header nav ul li a:hover {
+    color: rgb(75, 105, 162);
+}
+h2 {
+    margin-bottom: 20px;
+    color: rgb(1, 9, 44);
+}
+.opcoes-ajuda {
+    margin-top: 20px;
+}
+.opcoes-ajuda ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+}
+.opcoes-ajuda ul li {
+    margin-bottom: 15px;
+}
+.opcoes-ajuda a {
+    display: inline-block;
+    width: 100%;
+    padding: 12px 0;
+    background: rgb(1, 9, 44);
+    color: white;
+    text-decoration: none;
+    font-size: 1.1rem;
+    border-radius: 5px;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+.opcoes-ajuda a:hover {
+    background-color: rgb(75, 105, 162);
+}
+.opcoes-ajuda a:focus {
+    outline: none;
+    border: 2px solid rgb(75, 105, 162);
+}

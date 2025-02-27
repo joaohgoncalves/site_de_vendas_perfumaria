@@ -11,9 +11,9 @@ if (!isset($_SESSION['usuario_id'])) {
 // Excluir usuário
 if (isset($_GET['excluir'])) {
     $id_excluir = intval($_GET['excluir']);
-    $sql = "DELETE FROM usuarios WHERE id_usuario = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $id_excluir);
+    $sql = "DELETE FROM usuarios WHERE id_usuario = :id_usuario"; // Usando marcador de parâmetro
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':id_usuario', $id_excluir, PDO::PARAM_INT);
     $stmt->execute();
     header("Location: gerenciar_usuarios.php");
     exit;
@@ -21,7 +21,7 @@ if (isset($_GET['excluir'])) {
 
 // Buscar todos os usuários
 $sql = "SELECT id_usuario, nome, email FROM usuarios";
-$result = $conn->query($sql);
+$stmt = $pdo->query($sql);
 ?>
 
 <!DOCTYPE html>
@@ -145,7 +145,7 @@ button.excluir:hover {
         <th>Email</th>
         <th>Ações</th>
     </tr>
-    <?php while ($usuario = $result->fetch_assoc()): ?>
+    <?php while ($usuario = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
     <tr>
         <td><?php echo $usuario['id_usuario']; ?></td>
         <td><?php echo $usuario['nome']; ?></td>

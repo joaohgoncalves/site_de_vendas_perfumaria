@@ -1,18 +1,20 @@
 <?php
-// Inicia a sessão apenas se ainda não estiver ativa
+// Inicia a sessão se ainda não estiver ativa
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
+// Configurações de conexão com o banco de dados
 $host = "localhost";
-$usuario = "root"; // Usuário do banco
-$senha = ""; // Senha do banco (vazia no XAMPP)
-$banco = "teste"; // Nome do banco de dados
+$usuario = "root";
+$senha = "";
+$banco = "teste";  // Nome do seu banco de dados
 
-$conn = new mysqli($host, $usuario, $senha, $banco);
-
-// Verifica se a conexão falhou
-if ($conn->connect_error) {
-    die("Erro na conexão: " . $conn->connect_error);
+try {
+    // Criação da conexão PDO
+    $pdo = new PDO("mysql:host=$host;dbname=$banco", $usuario, $senha);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    die("Erro de conexão: " . $e->getMessage());
 }
 ?>

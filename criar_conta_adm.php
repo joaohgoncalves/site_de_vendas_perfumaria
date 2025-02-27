@@ -47,64 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Criar Conta Administrador</title>
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Arial', sans-serif;
-        }
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background: linear-gradient(135deg, rgb(1, 9, 44), rgb(75, 105, 162));
-        }
-        .container {
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            width: 100%;
-            max-width: 350px;
-            text-align: center;
-        }
-        .container h2 {
-            margin-bottom: 1rem;
-            color: rgb(1, 9, 44);
-        }
-        .input-group {
-            margin-bottom: 1rem;
-            text-align: left;
-        }
-        .input-group input {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid rgb(75, 105, 162);
-            border-radius: 5px;
-            font-size: 1rem;
-        }
-        .btn {
-            width: 100%;
-            padding: 10px;
-            background: rgb(1, 9, 44);
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        .btn:hover {
-            background: rgb(75, 105, 162);
-        }
-        .erro {
-            color: red;
-            font-weight: bold;
-            margin-bottom: 1rem;
-        }
-    </style>
+    <link rel="stylesheet" href="criar_conta_adm.css">
 </head>
 <body>
 

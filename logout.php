@@ -1,6 +1,6 @@
 <?php
 session_start();
-session_destroy();
-header("Location: index.php");
-exit;
+session_destroy();  // Destrói todas as variáveis de sessão
+header("Location: index.php");  // Redireciona para a página inicial
+exit();
 ?>

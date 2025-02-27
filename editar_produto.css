@@ -1,0 +1,99 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Corpo da página */
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #1E3C72, #2A5298);
+    color: white;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Container do formulário */
+form {
+    background: white;
+    color: black;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 500px;
+    text-align: left;
+}
+
+/* Estilo dos rótulos */
+form label {
+    font-weight: bold;
+    display: block;
+    margin-top: 15px;
+}
+
+/* Estilo dos inputs e textarea */
+form input,
+form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+/* Ajuste para textarea */
+form textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Botão de envio */
+form button {
+    width: 100%;
+    padding: 12px;
+    background: #1E3C72;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 20px;
+}
+
+/* Efeito hover no botão */
+form button:hover {
+    background: #2A5298;
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 600px) {
+    form {
+        padding: 1.5rem;
+    }
+}
+
+/* Estilos para exibição das fotos */
+.foto-preview {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.foto-preview img {
+    max-width: 100px;
+    max-height: 100px;
+    border-radius: 5px;
+    object-fit: cover;
+}
+
+/* Esconde a data de início até que a checkbox seja marcada */
+#data_inicio_container {
+    display: none;
+}

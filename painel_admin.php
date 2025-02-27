@@ -1,6 +1,6 @@
 <?php
 session_start();
-require 'conexao.php';
+require 'conexao.php'; // Certifique-se de que o arquivo conexao.php está configurado corretamente
 
 // Verifica se o usuário está logado e é administrador
 if (!isset($_SESSION["usuario_id"]) || $_SESSION["usuario_tipo"] !== "administrador") {
@@ -14,10 +14,11 @@ $sql_total_produtos = "SELECT COUNT(*) AS total FROM produtos";
 $sql_total_categorias = "SELECT COUNT(*) AS total FROM categorias";
 $sql_total_vendas = "SELECT SUM(valor) AS total FROM vendas";
 
-$total_usuarios = $conn->query($sql_total_usuarios)->fetch_assoc()['total'];
-$total_produtos = $conn->query($sql_total_produtos)->fetch_assoc()['total'];
-$total_categorias = $conn->query($sql_total_categorias)->fetch_assoc()['total'];
-$total_vendas = $conn->query($sql_total_vendas)->fetch_assoc()['total'] ?? 0;
+// Usando PDO para executar as consultas
+$total_usuarios = $pdo->query($sql_total_usuarios)->fetch(PDO::FETCH_ASSOC)['total'];
+$total_produtos = $pdo->query($sql_total_produtos)->fetch(PDO::FETCH_ASSOC)['total'];
+$total_categorias = $pdo->query($sql_total_categorias)->fetch(PDO::FETCH_ASSOC)['total'];
+$total_vendas = $pdo->query($sql_total_vendas)->fetch(PDO::FETCH_ASSOC)['total'] ?? 0;
 ?>
 
 <!DOCTYPE html>
@@ -29,7 +30,7 @@ $total_vendas = $conn->query($sql_total_vendas)->fetch_assoc()['total'] ?? 0;
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="styles.css">
     <style>
-        * {
+       * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;

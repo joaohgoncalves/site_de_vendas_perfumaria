@@ -29,6 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <title>Criar Administrador</title>
 </head>
+<link rel="stylesheet" href="cadastro_admin.css">
 <body>
 <?php include 'navbar.php'; ?>
 

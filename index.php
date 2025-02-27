@@ -1,6 +1,7 @@
 <?php
 session_start();
-require 'conexao.php';
+require 'conexao.php'; // Inclui a conexão com o banco de dados
+
 ?>
 
 <!DOCTYPE html>
@@ -28,12 +29,12 @@ require 'conexao.php';
 <div class="header">
     <h1>Perfumes Online</h1>
     <div class="menu">
-        <?php if (isset($_SESSION["id_usuario"])): ?>
+    <?php if (isset($_SESSION['usuario_id'])): ?>
             <a href="perfil.php">Perfil</a>
             <a href="logout.php">Sair</a>
         <?php else: ?>
             <a href="login.php">Login</a>
-            <a href="cadastrar.php">Criar Conta</a>
+            <a href="criar_conta.php">Criar Conta</a>
         <?php endif; ?>
     </div>
 </div>
@@ -42,11 +43,12 @@ require 'conexao.php';
     <h2>Produtos</h2>
     <div class="produtos">
         <?php
+        // Modificando para usar o PDO
         $sql = "SELECT * FROM produtos";
-        $result = $conn->query($sql);
+        $stmt = $pdo->query($sql); // Use o PDO para realizar a consulta
 
-        if ($result->num_rows > 0):
-            while ($produto = $result->fetch_assoc()):
+        if ($stmt->rowCount() > 0):
+            while ($produto = $stmt->fetch(PDO::FETCH_ASSOC)):
         ?>
                 <div class="produto">
                     <img src="uploads/<?php echo $produto['imagem']; ?>" alt="<?php echo $produto['nome']; ?>">

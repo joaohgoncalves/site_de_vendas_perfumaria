@@ -1,6 +1,11 @@
 <?php
-session_start();
-require 'conexao.php'; // Arquivo de conexão com o banco
+// Inicia a sessão
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Inclui o arquivo de conexão com o banco de dados
+require 'conexao.php'; // Verifique se $pdo está sendo definido corretamente aqui
 
 $etapa = 1; // Etapa inicial
 $erro = "";
@@ -9,14 +14,13 @@ $erro = "";
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["email"])) {
     $email = trim($_POST["email"]);
 
-    // Verifica se o e-mail existe
-    $sql = "SELECT id_usuario FROM usuarios WHERE email = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("s", $email);
+    // Verifica se o e-mail existe no banco de dados
+    $sql = "SELECT id_usuario FROM usuarios WHERE email = :email";
+    $stmt = $pdo->prepare($sql); // Usando $pdo aqui
+    $stmt->bindParam(':email', $email);
     $stmt->execute();
-    $result = $stmt->get_result();
 
-    if ($result->num_rows == 1) {
+    if ($stmt->rowCount() == 1) {
         $_SESSION["email_recuperacao"] = $email;
         $etapa = 2; // Avança para a etapa de redefinição de senha
     } else {
@@ -30,10 +34,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["nova_senha"])) {
         $nova_senha = password_hash($_POST["nova_senha"], PASSWORD_DEFAULT);
         $email = $_SESSION["email_recuperacao"];
 
-        // Atualiza a senha no banco
-        $sql = "UPDATE usuarios SET senha = ? WHERE email = ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ss", $nova_senha, $email);
+        // Atualiza a senha no banco de dados
+        $sql = "UPDATE usuarios SET senha = :senha WHERE email = :email";
+        $stmt = $pdo->prepare($sql); // Usando $pdo aqui
+        $stmt->bindParam(':senha', $nova_senha);
+        $stmt->bindParam(':email', $email);
         $stmt->execute();
 
         unset($_SESSION["email_recuperacao"]); // Limpa a sessão
@@ -54,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["nova_senha"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recuperação de Senha</title>
     <style>
-        * {
+            * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
